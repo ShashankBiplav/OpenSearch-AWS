@@ -10,6 +10,7 @@
 
 ## Project Structure
 
+```
 - root
   |
   |**\_**package.json
@@ -25,3 +26,4 @@
   |**\_**|**\_\_\_**helpers
   |**\_**|**\_\_\_**routes
   |**\_**|**\_\_\_**services
+```
