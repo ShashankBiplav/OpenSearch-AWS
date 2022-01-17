@@ -4,40 +4,42 @@ import { logAggs } from "../helpers/helpers";
 /**
  * Get metric aggregations for the field
  * Examples: stats, extended_stats, percentiles, terms
- * run-func aggregate metric avg rating
+ * example: avg rating
  */
-export const metric = (metric: any, field: any) => {
+export const metricAggr = async (
+  metric: string,
+  field: string,
+  matchField: string,
+  matchValue: string
+) => {
   const body = {
     aggs: {
       [`aggs-for-${field}`]: {
-        //aggs name
+        //aggregation name
         [metric]: {
           // aggregation type
           field,
         },
       },
     },
-    // query: {
-    //     match: {
-    //         [matchField]: matchValue
-    //     }
-    // },
-  };
-  client.search(
-    {
-      index,
-      body,
-      size: 0, // we're not interested in `hits`
+    query: {
+      match: {
+        [matchField]: matchValue,
+      },
     },
-    logAggs.bind(this, `aggs-for-${field}`)
-  );
+  };
+  return await client.search({
+    index,
+    body,
+    size: 0, //not interested in the amount of hits
+  });
 };
 
 /**
  * Histogram with interval
- * run-func aggregate histogram rating 1
+ * rating 1
  */
-export const histogram = (field: string, interval: any) => {
+export const histogramAggr = async (field: string, interval: number) => {
   const body = {
     aggs: {
       [`aggs-for-${field}`]: {
@@ -61,40 +63,15 @@ export const histogram = (field: string, interval: any) => {
 
 /**
  * Date histogram with interval
- * run-func aggregate dateHistogram date year
+ * date year
  */
-export const dateHistogram = (field: string, interval: any) => {
+export const dateHistogramAggr = (field: string, interval: any) => {
   const body = {
     aggs: {
       [`aggs-for-${field}`]: {
         date_histogram: {
           field,
           interval,
-        },
-      },
-    },
-  };
-  client.search(
-    {
-      index,
-      body,
-      size: 0,
-    },
-    logAggs.bind(this, `aggs-for-${field}`)
-  );
-};
-
-/**
- * Date histogram with number of buckets
- * run-func aggregate autoDateHistogram date 3
- */
-export const autoDateHistogram = (field: string, buckets: number) => {
-  const body = {
-    aggs: {
-      [`aggs-for-${field}`]: {
-        auto_date_histogram: {
-          field,
-          buckets,
         },
       },
     },

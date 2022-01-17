@@ -10,6 +10,12 @@ import {
   term,
 } from "../services/search.service";
 
+import {
+  dateHistogramAggr,
+  histogramAggr,
+  metricAggr,
+} from "../services/aggregate.service";
+
 /**
  *
  * @returns all the available indices
@@ -150,7 +156,69 @@ export const booleanQuery: RequestHandler = async (req, res, next) => {
 };
 
 /**
- *
+ * metric aggregator
+ * @returns
+ */
+export const metricAggregator: RequestHandler = async (req, res, next) => {
+  const {
+    metric,
+    field,
+    matchField,
+    matchValue,
+  }: {
+    metric: string;
+    field: string;
+    matchField: string;
+    matchValue: string;
+  } = req.body;
+  try {
+    const response = await metricAggr(metric, field, matchField, matchValue);
+    return res.status(200).json({
+      message: `Aggregation results`,
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/**
+ * histogram aggregator
+ */
+export const histogramAggregator: RequestHandler = async (req, res, next) => {
+  const { field, interval }: { field: string; interval: number } = req.body;
+  try {
+    const response = await histogramAggr(field, interval);
+    return res.status(200).json({
+      message: `Aggregation results for histogram aggregator`,
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/**
+ * date histogram aggregator
+ */
+export const dateHistogramAggregator: RequestHandler = async (
+  req,
+  res,
+  next
+) => {
+  const { field, interval }: { field: string; interval: number } = req.body;
+  try {
+    const response = await dateHistogramAggr(field, interval);
+    return res.status(200).json({
+      message: `Aggregation results for date histogram aggregator`,
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/**
  * deletes the given index
  */
 export const deleteIndex: RequestHandler = async (req, res, next) => {

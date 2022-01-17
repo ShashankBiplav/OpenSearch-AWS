@@ -10,6 +10,8 @@ import {
   termQuery,
   rangeQuery,
   booleanQuery,
+  metricAggregator,
+  histogramAggregator,
 } from "../controllers";
 
 const router = express.Router();
@@ -29,6 +31,12 @@ router.post("/term-query", termQuery);
 router.post("/range-query", rangeQuery);
 
 router.post("/boolean-query", booleanQuery);
+
+router.post("/metric-aggregator", metricAggregator);
+
+router.post("/histogram-aggregator", histogramAggregator);
+
+router.post("/date-histogram-aggregator", metricAggregator);
 
 router.post("/delete", deleteIndex);
 
