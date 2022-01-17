@@ -1,5 +1,5 @@
-import { client, indexName as index } from "./config";
-import { logAggs } from "./helpers";
+import { client, indexName as index } from "../config";
+import { logAggs } from "../helpers/helpers";
 
 /**
  * Get metric aggregations for the field

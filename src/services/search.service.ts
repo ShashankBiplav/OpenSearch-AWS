@@ -1,12 +1,11 @@
-import { client, indexName as index } from "./config";
-import { logTitles } from "./helpers";
+import { client, indexName as index } from "../config";
 
 /**
  * Finding matches sorted by relevance (full-text query)
  * search match title "soups with beer and garlic"
  * search match title "pizza salad and cheese"
  */
-export const match = (field: string, query: any) => {
+export const match = async (field: string, query: string) => {
   const body = {
     query: {
       match: {
@@ -16,13 +15,10 @@ export const match = (field: string, query: any) => {
       },
     },
   };
-  client.search(
-    {
-      index,
-      body,
-    },
-    logTitles
-  );
+  return await client.search({
+    index,
+    body,
+  });
 };
 
 /**
@@ -30,7 +26,7 @@ export const match = (field: string, query: any) => {
  * search phrase title 'pasta with cheese'
  * search phrase title 'milk chocolate cake'
  */
-export const phrase = (field: string, query: any, slop: any) => {
+export const phrase = async (field: string, query: any, slop: any) => {
   const body = {
     query: {
       match_phrase: {
@@ -41,13 +37,10 @@ export const phrase = (field: string, query: any, slop: any) => {
       },
     },
   };
-  client.search(
-    {
-      index,
-      body,
-    },
-    logTitles
-  );
+  return await client.search({
+    index,
+    body,
+  });
 };
 
 /**
@@ -55,7 +48,7 @@ export const phrase = (field: string, query: any, slop: any) => {
  * search queryString title '+(dessert | cake) -garlic  (mango | caramel | cinnamon)'
  * search queryString title '+(salad | soup) -broccoli  (tomato | apple)'
  */
-export const queryString = (field: string, query: any) => {
+export const queryString = async (field: string, query: any) => {
   const body = {
     query: {
       query_string: {
@@ -64,20 +57,17 @@ export const queryString = (field: string, query: any) => {
       },
     },
   };
-  client.search(
-    {
-      index,
-      body,
-    },
-    logTitles
-  );
+  return await client.search({
+    index,
+    body,
+  });
 };
 
 /**
  * Searching for exact matches of a value in a field (term-level query)
  * search term sodium 0
  */
-export const term = (field: string, value: any) => {
+export const term = async (field: string, value: any) => {
   const body = {
     query: {
       term: {
@@ -85,13 +75,10 @@ export const term = (field: string, value: any) => {
       },
     },
   };
-  client.search(
-    {
-      index,
-      body,
-    },
-    logTitles
-  );
+  return await client.search({
+    index,
+    body,
+  });
 };
 
 /**
@@ -102,7 +89,7 @@ export const term = (field: string, value: any) => {
  * lte (less than or equal to)
  * search range sodium 0 100
  */
-export const range = (field: string, gte: number, lte: number) => {
+export const range = async (field: string, gte: number, lte: number) => {
   const body = {
     query: {
       range: {
@@ -113,20 +100,17 @@ export const range = (field: string, gte: number, lte: number) => {
       },
     },
   };
-  client.search(
-    {
-      index,
-      body,
-    },
-    logTitles
-  );
+  return await client.search({
+    index,
+    body,
+  });
 };
 
 /**
  * Combining several queries together (boolean query)
  * search boolean
  */
-export const boolean = () => {
+export const boolean = async () => {
   const body = {
     query: {
       bool: {
@@ -140,11 +124,8 @@ export const boolean = () => {
       },
     },
   };
-  client.search(
-    {
-      index,
-      body,
-    },
-    logTitles
-  );
+  return await client.search({
+    index,
+    body,
+  });
 };
