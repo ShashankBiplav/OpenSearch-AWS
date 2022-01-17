@@ -1,8 +1,19 @@
 import { RequestHandler } from "express";
 import { client, indexName } from "../config";
 
-import { match } from "../services/search.service";
+import {
+  booleanTermQuery,
+  match,
+  phrase,
+  queryString,
+  range,
+  term,
+} from "../services/search.service";
 
+/**
+ *
+ * @returns all the available indices
+ */
 export const getIndices: RequestHandler = async (req, res, next) => {
   try {
     console.log(`Getting existing indices:`);
@@ -12,6 +23,11 @@ export const getIndices: RequestHandler = async (req, res, next) => {
     console.log(error);
   }
 };
+
+/**
+ *
+ * @returns the mapping of the index
+ */
 
 export const getMapping: RequestHandler = async (req, res, next) => {
   try {
@@ -27,6 +43,11 @@ export const getMapping: RequestHandler = async (req, res, next) => {
   }
 };
 
+/**
+ *
+ * Full text Query
+ * @returns matches sorted by relevance
+ */
 export const matchQuery: RequestHandler = async (req, res, next) => {
   const { field, query }: { field: string; query: string } = req.body;
   try {
@@ -40,6 +61,98 @@ export const matchQuery: RequestHandler = async (req, res, next) => {
   }
 };
 
+/**
+ * full text query
+ * @returns a phrase match
+ */
+export const phraseQuery: RequestHandler = async (req, res, next) => {
+  const { field, query, slop }: { field: string; query: string; slop: number } =
+    req.body;
+  try {
+    const response = await phrase(field, query, slop);
+    return res.status(200).json({
+      message: `Search results for field:${field} & query:${query} & slop:${slop}`,
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/**
+ * Full text query
+ * Use special operators in the query string
+ * example: +(salad | soup) -broccoli  (tomato | apple)'
+ * @returns results based on queryString
+ */
+export const queryStrQuery: RequestHandler = async (req, res, next) => {
+  const { field, query }: { field: string; query: string } = req.body;
+  try {
+    const response = await queryString(field, query);
+    return res.status(200).json({
+      message: `Search results for field:${field} & queryString:${query}`,
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/**
+ * Term level query
+ * @returns the exact mateches of a value in a field
+ */
+export const termQuery: RequestHandler = async (req, res, next) => {
+  const { field, value }: { field: string; value: any } = req.body;
+  try {
+    const response = await term(field, value);
+    return res.status(200).json({
+      message: `Search results for field:${field} & value:${value}`,
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/**
+ * Term level Query
+ * @returns the search results for a range of values in a field
+ */
+export const rangeQuery: RequestHandler = async (req, res, next) => {
+  const { field, gte, lte }: { field: string; gte: number; lte: number } =
+    req.body;
+  try {
+    const response = await range(field, gte, lte);
+    return res.status(200).json({
+      message: `Search results for field:${field} & range: gte${gte} , lte:${lte}`,
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/**
+ * Combines several queries together
+ * @returns the search results of boolean query
+ */
+export const booleanQuery: RequestHandler = async (req, res, next) => {
+  try {
+    const response = await booleanTermQuery();
+    return res.status(200).json({
+      message: `Search results for boolean query`,
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/**
+ *
+ * deletes the given index
+ */
 export const deleteIndex: RequestHandler = async (req, res, next) => {
   try {
     const { index }: { index: string } = req.body;

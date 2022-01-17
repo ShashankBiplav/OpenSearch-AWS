@@ -26,7 +26,7 @@ export const match = async (field: string, query: string) => {
  * search phrase title 'pasta with cheese'
  * search phrase title 'milk chocolate cake'
  */
-export const phrase = async (field: string, query: any, slop: any) => {
+export const phrase = async (field: string, query: string, slop: number) => {
   const body = {
     query: {
       match_phrase: {
@@ -48,7 +48,7 @@ export const phrase = async (field: string, query: any, slop: any) => {
  * search queryString title '+(dessert | cake) -garlic  (mango | caramel | cinnamon)'
  * search queryString title '+(salad | soup) -broccoli  (tomato | apple)'
  */
-export const queryString = async (field: string, query: any) => {
+export const queryString = async (field: string, query: string) => {
   const body = {
     query: {
       query_string: {
@@ -110,7 +110,7 @@ export const range = async (field: string, gte: number, lte: number) => {
  * Combining several queries together (boolean query)
  * search boolean
  */
-export const boolean = async () => {
+export const booleanTermQuery = async () => {
   const body = {
     query: {
       bool: {
