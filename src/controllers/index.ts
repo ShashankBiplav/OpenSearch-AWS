@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { client, indexName } from "../config";
+import { client, recipesIndex } from "../config";
 
 import {
   booleanTermQuery,
@@ -17,6 +17,20 @@ import {
   paginatedAggr,
   simpleAggr,
 } from "../services/aggregate.service";
+
+import { createScriptIndexService } from "../services/create_script_index.service";
+
+/**
+ * Creates the scripts index
+ */
+export const createScriptsIndex: RequestHandler = async (req, res, next) => {
+  try {
+    await createScriptIndexService();
+    res.status(200).json({ message: "Scripts index has been successfully" });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 /**
  *
@@ -39,11 +53,11 @@ export const getIndices: RequestHandler = async (req, res, next) => {
 
 export const getMapping: RequestHandler = async (req, res, next) => {
   try {
-    console.log(`Retrieving mapping for the index with name ${indexName}`);
+    console.log(`Retrieving mapping for the index with name ${recipesIndex}`);
 
-    const response = await client.indices.getMapping({ index: indexName });
+    const response = await client.indices.getMapping({ index: recipesIndex });
     return res.status(200).json({
-      message: `Retrieving mapping for the index with name ${indexName}`,
+      message: `Retrieving mapping for the index with name ${recipesIndex}`,
       response: response.body.recipes.mappings.properties,
     });
   } catch (error) {
@@ -292,7 +306,7 @@ export const deleteIndex: RequestHandler = async (req, res, next) => {
   try {
     const { index }: { index: string } = req.body;
     const response = await client.indices.delete({
-      index: index || indexName,
+      index: index || recipesIndex,
     });
     return res.status(200).json({
       message: `Deleted the index: ${index} successfully`,

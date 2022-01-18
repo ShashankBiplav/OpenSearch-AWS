@@ -1,4 +1,4 @@
-import { client, indexName as index } from "../config";
+import { client, recipesIndex as index } from "../config";
 import { logAggs } from "../helpers/helpers";
 
 /**

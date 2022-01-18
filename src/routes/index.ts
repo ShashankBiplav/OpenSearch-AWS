@@ -14,6 +14,7 @@ import {
   histogramAggregator,
   paginatedAggregator,
   simpleAggregator,
+  createScriptsIndex,
 } from "../controllers";
 
 const router = express.Router();
@@ -21,6 +22,8 @@ const router = express.Router();
 router.get("/indices", getIndices);
 
 router.get("/mapping", getMapping);
+
+router.get("/create-scripts-index", createScriptsIndex);
 
 router.post("/match-query", matchQuery);
 

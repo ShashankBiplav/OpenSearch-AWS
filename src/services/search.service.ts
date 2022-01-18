@@ -1,4 +1,4 @@
-import { client, indexName as index } from "../config";
+import { client, recipesIndex as index } from "../config";
 
 /**
  * Finding matches sorted by relevance (full-text query)
