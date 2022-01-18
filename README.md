@@ -6,7 +6,13 @@
 
 2. Copy .env.example, rename to .env and there the service_uri of your OpenSearch cluster.
 
-3. Download full_format_recipes from `Kaggle <https://www.kaggle.com/hugodarwood/epirecipes?select=full_format_recipes.json>`\*.
+3. Download full_format_recipes from Kaggle `https://www.kaggle.com/hugodarwood/epirecipes?select=full_format_recipes.json`.
+
+## Endpoints Documentation
+
+https://documenter.getpostman.com/view/11888806/UVXnFtWs
+
+> **Note:** For more **endpoints** see src>routes>index.ts.
 
 ## Project Structure
 
