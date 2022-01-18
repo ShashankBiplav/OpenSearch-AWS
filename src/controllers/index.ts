@@ -14,6 +14,8 @@ import {
   dateHistogramAggr,
   histogramAggr,
   metricAggr,
+  paginatedAggr,
+  simpleAggr,
 } from "../services/aggregate.service";
 
 /**
@@ -211,6 +213,71 @@ export const dateHistogramAggregator: RequestHandler = async (
     const response = await dateHistogramAggr(field, interval);
     return res.status(200).json({
       message: `Aggregation results for date histogram aggregator`,
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/**
+ * Paginated Aggregator
+ * @returns the filtered paginated content
+ */
+export const paginatedAggregator: RequestHandler = async (req, res, next) => {
+  const {
+    from,
+    size,
+    metric,
+    field,
+    matchField,
+    matchValue,
+  }: {
+    from: number;
+    size: number;
+    metric: string;
+    field: string;
+    matchField: string;
+    matchValue: string;
+  } = req.body;
+  try {
+    const response = await paginatedAggr(
+      from,
+      size,
+      metric,
+      field,
+      matchField,
+      matchValue
+    );
+    return res.status(200).json({
+      message: `Aggregation results for paginated aggregator`,
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/**
+ * Simple Aggregator that returns only the aggregation results
+ * @returns only the aggregation results not the amount of hits
+ */
+export const simpleAggregator: RequestHandler = async (req, res, next) => {
+  const {
+    metric,
+    field,
+    matchField,
+    matchValue,
+  }: {
+    metric: string;
+    field: string;
+    matchField: string;
+    matchValue: string;
+  } = req.body;
+  try {
+    const response = await simpleAggr(metric, field, matchField, matchValue);
+    return res.status(200).json({
+      message: `Aggregation results for simple aggregator`,
       response,
     });
   } catch (error) {

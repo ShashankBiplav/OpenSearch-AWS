@@ -76,12 +76,70 @@ export const dateHistogramAggr = (field: string, interval: any) => {
       },
     },
   };
-  client.search(
-    {
-      index,
-      body,
-      size: 0,
+  client.search({
+    index,
+    body,
+    size: 0,
+  });
+};
+
+export const paginatedAggr = async (
+  from: number,
+  size: number,
+  metric: string,
+  field: string,
+  matchField: string,
+  matchValue: string
+) => {
+  const body = {
+    aggs: {
+      [`aggs-for-${field}`]: {
+        //aggregation name
+        [metric]: {
+          // aggregation type
+          field,
+        },
+      },
     },
-    logAggs.bind(this, `aggs-for-${field}`)
-  );
+    query: {
+      match: {
+        [matchField]: matchValue,
+      },
+    },
+  };
+  return await client.search({
+    index,
+    body,
+    from: from,
+    size: size,
+  });
+};
+
+export const simpleAggr = async (
+  metric: string,
+  field: string,
+  matchField: string,
+  matchValue: string
+) => {
+  const body = {
+    aggs: {
+      [`aggs-for-${field}`]: {
+        //aggregation name
+        [metric]: {
+          // aggregation type
+          field,
+        },
+      },
+    },
+    query: {
+      match: {
+        [matchField]: matchValue,
+      },
+    },
+  };
+  return await client.search({
+    index,
+    body,
+    size: 0, //not interested in the amount of hits
+  });
 };

@@ -12,6 +12,8 @@ import {
   booleanQuery,
   metricAggregator,
   histogramAggregator,
+  paginatedAggregator,
+  simpleAggregator,
 } from "../controllers";
 
 const router = express.Router();
@@ -37,6 +39,10 @@ router.post("/metric-aggregator", metricAggregator);
 router.post("/histogram-aggregator", histogramAggregator);
 
 router.post("/date-histogram-aggregator", metricAggregator);
+
+router.post("/paginated-aggregator", paginatedAggregator);
+
+router.post("/simple-aggregator", simpleAggregator);
 
 router.post("/delete", deleteIndex);
 
