@@ -19,7 +19,10 @@ import {
 } from "../services/aggregate.service";
 
 import { createScriptIndexService } from "../services/create_script_index.service";
-import { getPaginatedScripts } from "../services/script.search.service";
+import {
+  getAllScripts,
+  getPaginatedScripts,
+} from "../services/script.search.service";
 import { seedScriptsToOpenSearch } from "../services/seed.scripts.service";
 
 /**
@@ -38,6 +41,19 @@ export const seedScripts: RequestHandler = async (req, res, next) => {
   try {
     const response = await seedScriptsToOpenSearch();
     return res.status(200).json({ message: "Seeding succeeded", response });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllScriptsSearch: RequestHandler = async (req, res, next) => {
+  try {
+    const response = await getAllScripts();
+    return res.status(200).json({
+      message: "All scripts fetched",
+      scripts: response,
+      // scripts: response.body.hits.hits,
+    });
   } catch (error) {
     console.log(error);
   }

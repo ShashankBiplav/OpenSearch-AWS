@@ -16,6 +16,8 @@ import {
   simpleAggregator,
   createScriptsIndex,
   seedScripts,
+  getAllScriptsSearch,
+  getpaginatedScriptsSearch,
 } from "../controllers";
 
 const router = express.Router();
@@ -27,6 +29,10 @@ router.get("/mapping", getMapping);
 router.get("/create-scripts-index", createScriptsIndex);
 
 router.get("/seed-scripts", seedScripts);
+
+router.get("/all-scripts", getAllScriptsSearch);
+
+router.post("/paginated-scripts", getpaginatedScriptsSearch);
 
 router.post("/match-query", matchQuery);
 
