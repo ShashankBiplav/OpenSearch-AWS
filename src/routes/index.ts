@@ -15,6 +15,7 @@ import {
   paginatedAggregator,
   simpleAggregator,
   createScriptsIndex,
+  seedScripts,
 } from "../controllers";
 
 const router = express.Router();
@@ -24,6 +25,8 @@ router.get("/indices", getIndices);
 router.get("/mapping", getMapping);
 
 router.get("/create-scripts-index", createScriptsIndex);
+
+router.get("/seed-scripts", seedScripts);
 
 router.post("/match-query", matchQuery);
 

@@ -19,6 +19,8 @@ import {
 } from "../services/aggregate.service";
 
 import { createScriptIndexService } from "../services/create_script_index.service";
+import { getPaginatedScripts } from "../services/script.search.service";
+import { seedScriptsToOpenSearch } from "../services/seed.scripts.service";
 
 /**
  * Creates the scripts index
@@ -27,6 +29,53 @@ export const createScriptsIndex: RequestHandler = async (req, res, next) => {
   try {
     await createScriptIndexService();
     res.status(200).json({ message: "Scripts index has been successfully" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const seedScripts: RequestHandler = async (req, res, next) => {
+  try {
+    const response = await seedScriptsToOpenSearch();
+    return res.status(200).json({ message: "Seeding succeeded", response });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getpaginatedScriptsSearch: RequestHandler = async (
+  req,
+  res,
+  next
+) => {
+  const {
+    from,
+    size,
+    metric,
+    field,
+    matchField,
+    matchValue,
+  }: {
+    from: number;
+    size: number;
+    metric: string;
+    field: string;
+    matchField: string;
+    matchValue: string;
+  } = req.body;
+  try {
+    const scripts = await getPaginatedScripts(
+      from,
+      size,
+      metric,
+      field,
+      matchField,
+      matchValue
+    );
+    return res.status(200).json({
+      message: `All paginated scripts fetched matching conditions: from: ${from},size: ${size},metric: ${metric},field: ${field},matchField: ${matchField},matchValue: ${matchValue}`,
+      scripts,
+    });
   } catch (error) {
     console.log(error);
   }
