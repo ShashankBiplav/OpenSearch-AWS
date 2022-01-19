@@ -18,6 +18,7 @@ import {
   seedScripts,
   getAllScriptsSearch,
   getpaginatedScriptsSearch,
+  getPaginatedBooleanFilteredScripts,
 } from "../controllers";
 
 const router = express.Router();
@@ -55,6 +56,8 @@ router.post("/date-histogram-aggregator", metricAggregator);
 router.post("/paginated-aggregator", paginatedAggregator);
 
 router.post("/simple-aggregator", simpleAggregator);
+
+router.post("/filter-scripts", getPaginatedBooleanFilteredScripts);
 
 router.post("/delete", deleteIndex);
 

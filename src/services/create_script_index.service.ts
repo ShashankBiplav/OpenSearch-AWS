@@ -25,6 +25,8 @@ export const createScriptIndexService = async () => {
           cdItem: { type: "long" },
           patientName: { type: "text" },
           scriptItems: { type: "long" },
+          prescriptionStatus: { type: "text" },
+          prescriptionDate: { type: "date" },
           items: {
             type: "nested",
             properties: {

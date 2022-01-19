@@ -11,6 +11,8 @@ export interface IScriptSearch {
   cdItem?: number;
   patientName?: string;
   scriptItems?: number;
+  prescriptionStatus?: string;
+  prescriptionDate?: string;
   items?: IScriptItems;
 }
 
@@ -25,7 +27,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 101,
     cdItem: 1,
     patientName: "Shashank Biplav",
-    scriptItems: 3,
+    scriptItems: 31,
+    prescriptionStatus: "new",
+    prescriptionDate: "2022-01-18T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -37,7 +41,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 102,
     cdItem: 2,
     patientName: "Abcdefghig",
-    scriptItems: 3,
+    scriptItems: 6,
+    prescriptionStatus: "new",
+    prescriptionDate: "2022-01-16T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -49,7 +55,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 1003,
     cdItem: 13,
     patientName: "Shashank Biplav3",
-    scriptItems: 3,
+    scriptItems: 39,
+    prescriptionStatus: "new",
+    prescriptionDate: "2022-01-19T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -61,7 +69,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 104,
     cdItem: 4,
     patientName: "Shashank Bipla4",
-    scriptItems: 3,
+    scriptItems: 12,
+    prescriptionStatus: "old",
+    prescriptionDate: "2022-01-17T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -73,7 +83,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 105,
     cdItem: 5,
     patientName: "Shashank Bipla5",
-    scriptItems: 3,
+    scriptItems: 15,
+    prescriptionStatus: "old",
+    prescriptionDate: "2022-01-19T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -85,7 +97,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 106,
     cdItem: 6,
     patientName: "Shashank Bipla6",
-    scriptItems: 3,
+    scriptItems: 18,
+    prescriptionStatus: "old",
+    prescriptionDate: "2022-01-19T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -97,7 +111,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 1007,
     cdItem: 7,
     patientName: "Shashank Bipla7",
-    scriptItems: 3,
+    scriptItems: 21,
+    prescriptionStatus: "old",
+    prescriptionDate: "2022-01-18T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -109,7 +125,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 108,
     cdItem: 8,
     patientName: "Shashank Bipla8",
-    scriptItems: 3,
+    scriptItems: 7,
+    prescriptionStatus: "new",
+    prescriptionDate: "2022-01-19T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -121,7 +139,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 109,
     cdItem: 9,
     patientName: "Shashank Bipla9",
-    scriptItems: 3,
+    scriptItems: 29,
+    prescriptionStatus: "old",
+    prescriptionDate: "2022-01-17T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -133,7 +153,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 1010,
     cdItem: 10,
     patientName: "Shashank Bipla10",
-    scriptItems: 3,
+    scriptItems: 23,
+    prescriptionStatus: "new",
+    prescriptionDate: "2022-01-19T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -145,7 +167,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 1011,
     cdItem: 11,
     patientName: "Shashank Bipla11",
-    scriptItems: 3,
+    scriptItems: 11,
+    prescriptionStatus: "new",
+    prescriptionDate: "2022-01-16T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -157,7 +181,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 1002,
     cdItem: 12,
     patientName: "Shashank Biplav2",
-    scriptItems: 3,
+    scriptItems: 17,
+    prescriptionStatus: "new",
+    prescriptionDate: "2022-01-19T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -169,7 +195,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 1013,
     cdItem: 13,
     patientName: "Shashank Bipla13",
-    scriptItems: 3,
+    scriptItems: 4,
+    prescriptionStatus: "old",
+    prescriptionDate: "2022-01-19T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -181,7 +209,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 1014,
     cdItem: 14,
     patientName: "Shashank Bipla14",
-    scriptItems: 3,
+    scriptItems: 9,
+    prescriptionStatus: "old",
+    prescriptionDate: "2022-01-16T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -193,7 +223,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 1015,
     cdItem: 15,
     patientName: "Shashank Bipla15",
-    scriptItems: 3,
+    scriptItems: 22,
+    prescriptionStatus: "new",
+    prescriptionDate: "2022-01-19T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -205,7 +237,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 1016,
     cdItem: 16,
     patientName: "Shashank Bipla16",
-    scriptItems: 3,
+    scriptItems: 13,
+    prescriptionStatus: "new",
+    prescriptionDate: "2022-01-19T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -217,7 +251,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 1017,
     cdItem: 17,
     patientName: "Shashank Bipla17",
-    scriptItems: 3,
+    scriptItems: 7,
+    prescriptionStatus: "new",
+    prescriptionDate: "2022-01-17T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -229,7 +265,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 1018,
     cdItem: 18,
     patientName: "Shashank Bipla18",
-    scriptItems: 3,
+    scriptItems: 4,
+    prescriptionStatus: "old",
+    prescriptionDate: "2022-01-19T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -241,7 +279,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 1019,
     cdItem: 19,
     patientName: "Shashank Bipla19",
-    scriptItems: 3,
+    scriptItems: 9,
+    prescriptionStatus: "new",
+    prescriptionDate: "2022-01-18T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -253,7 +293,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 1020,
     cdItem: 20,
     patientName: "Shashank Bipla20",
-    scriptItems: 3,
+    scriptItems: 0,
+    prescriptionStatus: "new",
+    prescriptionDate: "2022-01-19T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",
@@ -265,7 +307,9 @@ export const scripts: IScriptSearch[] = [
     fridgeItem: 1021,
     cdItem: 21,
     patientName: "Shashank Bipla21",
-    scriptItems: 3,
+    scriptItems: 2,
+    prescriptionStatus: "old",
+    prescriptionDate: "2022-01-19T09:09:57.390Z",
     items: {
       drugCode: "drgCd1",
       drugName: "Caffiene",

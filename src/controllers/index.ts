@@ -21,6 +21,7 @@ import {
 import { createScriptIndexService } from "../services/create_script_index.service";
 import {
   getAllScripts,
+  getDateFilteredPaginatedScripts,
   getPaginatedScripts,
 } from "../services/script.search.service";
 import { seedScriptsToOpenSearch } from "../services/seed.scripts.service";
@@ -364,6 +365,50 @@ export const simpleAggregator: RequestHandler = async (req, res, next) => {
   }
 };
 
+export const getPaginatedBooleanFilteredScripts: RequestHandler = async (
+  req,
+  res,
+  next
+) => {
+  const {
+    from,
+    size,
+    metric,
+    field,
+    startingDate,
+    endingDate,
+    matchField,
+    matchValue,
+  }: {
+    from: number;
+    size: number;
+    metric: string;
+    field: string;
+    startingDate: string;
+    endingDate: string;
+    matchField: string;
+    matchValue: string;
+  } = req.body;
+  try {
+    const response = await getDateFilteredPaginatedScripts(
+      from,
+      size,
+      metric,
+      field,
+      startingDate,
+      endingDate,
+      matchField,
+      matchValue
+    );
+    return res.status(200).json({
+      message: `All paginated scripts fetched matching conditions: from: ${from},size: ${size},metric: ${metric},field: ${field},startingDate: ${startingDate}, endingDate: ${endingDate}, matchField: ${matchField},matchValue: ${matchValue}`,
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 /**
  * deletes the given index
  */
@@ -371,7 +416,7 @@ export const deleteIndex: RequestHandler = async (req, res, next) => {
   try {
     const { index }: { index: string } = req.body;
     const response = await client.indices.delete({
-      index: index || recipesIndex,
+      index: index,
     });
     return res.status(200).json({
       message: `Deleted the index: ${index} successfully`,
