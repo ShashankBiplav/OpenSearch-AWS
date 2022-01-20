@@ -23,6 +23,7 @@ import {
   getAllScripts,
   getDateFilteredPaginatedScripts,
   getPaginatedScripts,
+  updateScript,
 } from "../services/script.search.service";
 import { seedScriptsToOpenSearch } from "../services/seed.scripts.service";
 
@@ -402,6 +403,23 @@ export const getPaginatedBooleanFilteredScripts: RequestHandler = async (
     );
     return res.status(200).json({
       message: `All paginated scripts fetched matching conditions: from: ${from},size: ${size},metric: ${metric},field: ${field},startingDate: ${startingDate}, endingDate: ${endingDate}, matchField: ${matchField},matchValue: ${matchValue}`,
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+/**
+ * Update a document in a given index
+ * @returns the response data if document update succeeds
+ */
+export const updateScriptDocument: RequestHandler = async (req, res, next) => {
+  const { id, body }: { id: string; body: any } = req.body;
+  try {
+    const response = await updateScript(id, body);
+    return res.status(201).json({
+      message: `Document with id: ${id} updated successfully`,
       response,
     });
   } catch (error) {

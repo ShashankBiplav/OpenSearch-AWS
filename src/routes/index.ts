@@ -19,6 +19,7 @@ import {
   getAllScriptsSearch,
   getpaginatedScriptsSearch,
   getPaginatedBooleanFilteredScripts,
+  updateScriptDocument,
 } from "../controllers";
 
 const router = express.Router();
@@ -58,6 +59,8 @@ router.post("/paginated-aggregator", paginatedAggregator);
 router.post("/simple-aggregator", simpleAggregator);
 
 router.post("/filter-scripts", getPaginatedBooleanFilteredScripts);
+
+router.post("/update", updateScriptDocument);
 
 router.post("/delete", deleteIndex);
 

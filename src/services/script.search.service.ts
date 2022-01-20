@@ -80,10 +80,19 @@ export const getDateFilteredPaginatedScripts = async (
       },
     },
   };
+
   return await client.search({
     index: scriptsIndex,
     body,
     from: from,
     size: size,
+  });
+};
+
+export const updateScript = async (id: string, body: any) => {
+  return await client.update({
+    id,
+    index: scriptsIndex,
+    body,
   });
 };
