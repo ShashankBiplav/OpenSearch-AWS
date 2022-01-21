@@ -20,6 +20,7 @@ import {
   getpaginatedScriptsSearch,
   getPaginatedBooleanFilteredScripts,
   updateScriptDocument,
+  customQuery,
 } from "../controllers";
 
 const router = express.Router();
@@ -63,5 +64,7 @@ router.post("/filter-scripts", getPaginatedBooleanFilteredScripts);
 router.post("/update", updateScriptDocument);
 
 router.post("/delete", deleteIndex);
+
+router.post("/custom-query", customQuery);
 
 export default router;

@@ -16,6 +16,22 @@ export interface IScriptSearch {
   items?: IScriptItems;
 }
 
+export interface I2ScriptSearch {
+  page?: number;
+  limit: number;
+  prescriptionStatus?: number[];
+  expiringInNextXDays?: number;
+  expiryDate?: {
+    from: Date | string;
+    to: Date | string;
+  };
+  showScriptForLastXDays?: number;
+  showScriptDate?: {
+    from: Date | string;
+    to: Date | string;
+  };
+}
+
 export interface IScriptResult {
   scripts?: IScriptSearch[];
 }

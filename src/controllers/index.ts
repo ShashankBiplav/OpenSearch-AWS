@@ -20,6 +20,7 @@ import {
 
 import { createScriptIndexService } from "../services/create_script_index.service";
 import {
+  customSearch,
   getAllScripts,
   getDateFilteredPaginatedScripts,
   getPaginatedScripts,
@@ -34,6 +35,17 @@ export const createScriptsIndex: RequestHandler = async (req, res, next) => {
   try {
     await createScriptIndexService();
     res.status(200).json({ message: "Scripts index has been successfully" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const customQuery: RequestHandler = async (req, res, next) => {
+  try {
+    const result = await customSearch();
+    console.log({ ...result });
+
+    res.status(200).json({ message: "Custom Query", result: result.body.hits });
   } catch (error) {
     console.log(error);
   }
